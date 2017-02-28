@@ -1,6 +1,6 @@
 <div class="panel panel-default" >
 	<div class="panel-heading">
-		<div class="panel-title">เข้าสู่ระบบ<a href="/register"><button type="button" class="btn btn-success right" style="margin: -6px auto;">สมัครสมาชิก</button></a></div>
+		<div class="panel-title">เข้าสู่ระบบ<a href="register"><button type="button" class="btn btn-success pull-right" style="margin: -6px auto;">สมัครสมาชิก</button></a></div>
 	</div>     
 	<div style="padding-top:30px" class="panel-body" >
 		<form action="#" method="post" class="form-horizontal">
@@ -15,7 +15,7 @@
 			<div class="input-group">
 				<div class="checkbox">
 					<label>
-						<input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+						<input type="checkbox" name="remember" value="1"> Remember me
 					</label>
 				</div>
 			</div>
@@ -33,5 +33,13 @@
 
 <?php 
 if(isset($_POST["username"]) && isset($_POST["password"])){
+	if(empty($_POST["remember"])){
+		$_POST["remember"] = false;
+	}
+	if(do_login($_POST["username"], $_POST["password"], $_POST["remember"])){
+		echo "ถูก";
+	} else {
+		echo "ผิด";
+	}
 }
 ?>

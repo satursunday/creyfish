@@ -7,12 +7,17 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
-			<!-- <a href="index.php"><img src="images/banner.png" width="100%" /></a> -->
+			<a href="index.php"><img src="images/banner.png" width="100%" /></a>
 		</div>
 	</div>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<ul class="nav navbar-nav"> 
+				<?php 
+					if(empty($_GET["action"])){
+						$_GET["action"] = "";
+					}
+				?>
 				<li <?php if(empty($_GET["action"]) || $_GET["action"] == "") echo 'class="active"';?>><a href="index.php" class="btn">หน้าแรก</a></li>
 				<li <?php if($_GET["action"] == "how-to-order") echo 'class="active"';?>><a href="how-to-order" class="btn">วิธีการสั่งซื้อสินค้า</a></li>
 				<li <?php if($_GET["action"] == "payment-confirm") echo 'class="active"';?>><a href="payment-confirm" class="btn">แจ้งชำระเงิน</a></li>
@@ -28,11 +33,11 @@
 	</nav>
     <div class="row row-offcanvas row-offcanvas-left">
         <!-- sidebar -->
-        <div class="column col-sm-3 col-xs-1">
-        	<nav class="navbar navbar-inverse">
-		            <ul class="nav navbar-inverse">
-		                <li><a href="#">Link 1</a></li>
-		            </ul>
+        <div class="column col-sm-3 col-xs-1" style="height: 100%;">
+        	<nav class="navbar navbar-inverse" style="height: 100%;">
+	            <ul class="nav navbar-inverse">
+	                <li><a href="#">Link 1</a></li>
+	            </ul>
             </nav>
         </div>
         <!-- /sidebar -->
