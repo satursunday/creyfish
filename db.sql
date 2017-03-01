@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2017 at 07:33 PM
+-- Generation Time: Mar 01, 2017 at 06:25 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -10048,10 +10048,10 @@ INSERT INTO `address_province` (`PROVINCE_ID`, `PROVINCE_CODE`, `PROVINCE_NAME`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `person`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `person` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(32) NOT NULL,
@@ -10060,11 +10060,52 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `person`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `date_created`, `last_login`) VALUES
-(32, 'd.tongkampan@gmail.com', '6e0c9321b505706b148927f229deb31c', '2017-03-01 01:19:22', '2017-03-01 01:28:12');
+INSERT INTO `person` (`id`, `email`, `password`, `date_created`, `last_login`) VALUES
+(32, 'd.tongkampan@gmail.com', '6e0c9321b505706b148927f229deb31c', '2017-03-01 01:19:22', '2017-03-01 23:32:55'),
+(34, 'natdanai@netway.co.th', '6e0c9321b505706b148927f229deb31c', '2017-03-01 22:27:14', '2017-03-01 23:24:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_categories`
+--
+
+CREATE TABLE `product_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `sort` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `name`, `sort`) VALUES
+(1, 'ทดสอบ', 1),
+(7, 'gegr', 2),
+(11, 'fdvfd', 3),
+(12, 'd', 4),
+(13, 'gregre', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff_list`
+--
+
+CREATE TABLE `staff_list` (
+  `uid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `staff_list`
+--
+
+INSERT INTO `staff_list` (`uid`) VALUES
+(32);
 
 -- --------------------------------------------------------
 
@@ -10097,7 +10138,8 @@ CREATE TABLE `users_data` (
 --
 
 INSERT INTO `users_data` (`id`, `uid`, `firstname`, `lastname`, `building`, `room`, `floor`, `house_number`, `moo`, `village`, `soi`, `road`, `PROVINCE_ID`, `AMPHUR_ID`, `DISTRICT_ID`, `post_code`, `phone`) VALUES
-(8, 32, 'ณัฐดนัย', 'ทองคำปั้น', 'อาคาร', '1', '99', 'Huay Khwang', 7, 'ทดทด', 'สอบ', 'บางถนน', 1, 18, 120, 10310, '02123456');
+(8, 32, 'ณัฐดนัย', 'ทองคำปั้น', 'อาคาร', '1', '99', 'Huay Khwang', 7, 'ทดทด', 'สอบ', 'บางถนน', 1, 18, 120, 10310, '02123456'),
+(10, 34, 'ณัฐดนัย', 'ทองคำปั้น', '', '', '', '44/44', 7, '', '', '', 3, 59, 313, 11111, '02123456');
 
 --
 -- Indexes for dumped tables
@@ -10128,11 +10170,19 @@ ALTER TABLE `address_province`
   ADD PRIMARY KEY (`PROVINCE_ID`);
 
 --
--- Indexes for table `users`
+-- Indexes for table `person`
 --
-ALTER TABLE `users`
+ALTER TABLE `person`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `sort` (`sort`);
 
 --
 -- Indexes for table `users_data`
@@ -10166,15 +10216,20 @@ ALTER TABLE `address_geography`
 ALTER TABLE `address_province`
   MODIFY `PROVINCE_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `person`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+ALTER TABLE `person`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+--
+-- AUTO_INCREMENT for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users_data`
 --
 ALTER TABLE `users_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

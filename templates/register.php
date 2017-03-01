@@ -86,11 +86,11 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "สมัครสมาช�
 		$password = md5($pass);
 		$create_users = <<<EOF
 			INSERT INTO 
-				`users`(`email`, `password`) 
-			VALUES ('{$email}','{$password}')
+				`person`(`email`, `password`, `date_created`) 
+			VALUES ('{$email}','{$password}', NOW())
 EOF;
 		if(mysql_query($create_users)){
-			$user_id = mysql_fetch_data("SELECT id FROM users WHERE email = '{$email}'");
+			$user_id = mysql_fetch_data("SELECT id FROM person WHERE email = '{$email}'");
 			$user_id = $user_id[0]["id"];
 			foreach($_POST["contact"] as $k => $v){
 				${$k} = generate_insert_text($v);
@@ -102,11 +102,13 @@ EOF;
 EOF;
 			if(mysql_query($create_user_data)){
 				do_login($email, $pass);
-				echo '
-				<script type="text/javascript">
-					window.location = "login";
-				</script>
-				';				
+				$msg = <<<EOF
+ยินดีต้อนรับสู่ The Spirit of Crayfish
+				
+ขอบคุณที่สมัครสมาชิกกับเรา
+EOF;
+				send_mail("ยินดีต้อนรับสู่ The Spirit of Crayfish", $msg, $email, $firstname . ' ' . $lastname);
+				do_redirect("login");
 			} else {
 				$main_error = array("status" => true, "msg" => "เกิดข้อผิดพลาด ไม่สามารถสมัครสมาชิกได้ โปรดติดต่อเจ้าหน้าที่");
 			}

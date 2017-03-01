@@ -9,7 +9,7 @@ function connect_db()
 {
 	$server = "localhost";
 	$user = "root"; //tmpnwg_admin
-	$pwd = ""; //anancrayfist
+	$pwd = ""; //anancrayfish
 	
 	$db = "tmpnwg_crayfish";
 	

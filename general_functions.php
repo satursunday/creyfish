@@ -14,6 +14,16 @@ function pprint($data, $exit = false)
 	}
 }
 
+function check_login()
+{
+	return (isset($_SESSION["user_login"]) && count($_SESSION["user_login"]) > 0) ? true : false;
+}
+
+function check_staff()
+{
+	return (check_login() && mysql_fetch_data("SELECT * FROM staff_list WHERE uid = '{$_SESSION["user_login"]["id"]}'", true) > 0) ? true : false;
+}
+
 function mysql_fetch_data($query, $fetch_row = false)
 {
 	connect_db();
@@ -67,7 +77,7 @@ function do_login($user, $pass, $cookie = false)
 			, district.DISTRICT_ID AS district_id
 			, district.DISTRICT_NAME AS district
 		FROM 
-			users AS u
+			person AS u
 		INNER JOIN
 			users_data AS d
 		ON
@@ -90,7 +100,7 @@ function do_login($user, $pass, $cookie = false)
 	");
 	if(count($result) > 0){
 		$_SESSION["user_login"] = $result[0];
-		mysql_query("UPDATE `users` SET `last_login`= NOW() WHERE id = '{$result[0]["id"]}'");
+		mysql_query("UPDATE `person` SET `last_login`= NOW() WHERE id = '{$result[0]["id"]}'");
 		if($cookie){
 			setcookie("user_login", json_encode($result[0]), time() + (86400 * 30), "/");
 		}
@@ -98,6 +108,40 @@ function do_login($user, $pass, $cookie = false)
 	} else {
 		return false;
 	}
+}
+
+function send_mail($subject, $msg, $to, $name)
+{
+	require_once("libs/phpmailer/PHPMailerAutoload.php");
 	
+	$mail = new PHPMailer;
+	$mail->IsSMTP();
+	$mail->CharSet = 'UTF-8';
+	$mail->SMTPDebug = 0;
+	$mail->Host = "smtp.gmail.com";
+	$mail->Port = 587;
+	$mail->SMTPSecure = "tls";
+	$mail->SMTPAuth = true;
+	$mail->Username = 'd.tongkampan@gmail.com';
+	$mail->Password = 'vmbetibxiyzesstp';
+	
+	$mail->setFrom('no-reply@thespiritofcrayfish.com', 'The Spirit of Crayfish');
+	$mail->addAddress($to, $name);
+	$mail->Subject = $subject;
+	$mail->msgHTML(str_replace("\n", "<br>", $msg));
+	
+	return ($mail->send()) ? true : false;
+}
+
+function do_redirect($location)
+{
+	if($location = "index"){
+		$location = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
+	}
+	echo <<<EOF
+<script type="text/javascript">
+	window.location = '{$location}';
+</script>
+EOF;
 }
 ?>
