@@ -37,9 +37,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
 		$_POST["remember"] = false;
 	}
 	if(do_login($_POST["username"], $_POST["password"], $_POST["remember"])){
-		echo "ถูก";
 	} else {
-		echo "ผิด";
 	}
 }
 ?>

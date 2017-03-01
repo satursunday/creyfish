@@ -1,10 +1,10 @@
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css?v=<?php echo rand(); ?>">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css?v=<?php echo rand(); ?>">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="js/jquery-3.1.1.min.js"></script>
 
-<div class="container">
+<div class="container" style="background-color: #ffffff;">
 	<div class="row">
 		<div class="col-xs-12">
 			<a href="index.php"><img src="images/banner.png" width="100%" /></a>

@@ -11,23 +11,7 @@ html {
 }
 body {
   margin: 0;
-  background-color: #888888;
-}
-
-.left {
-	float: left;
-}
-
-.right {
-	float: right;
-}
-
-.aleft {
-	text-align: left;
-}
-
-.aright {
-	text-align: right;
+  background-color: #888888 !important;
 }
 article,
 aside,
@@ -204,6 +188,23 @@ td,
 th {
   padding: 0;
 }
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.aright {
+	text-align: right;
+}
+
+.aleft {
+	text-align: left;
+}
+
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
   *,
@@ -1114,12 +1115,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #D00;
+  color: #337ab7;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #DDDDDD;
+  color: #23527c;
   text-decoration: underline;
 }
 a:focus {
