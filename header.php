@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="js/jquery-3.1.1.min.js"></script>
 
-<div class="container" style="background-color: #ffffff;">
+<div class="container" style="background-color: #ffffff; height:100$;">
 	<div class="row">
 		<div class="col-xs-12">
 			<a href="index.php"><img src="images/banner.png" width="100%" /></a>
@@ -31,7 +31,7 @@
         	</ul>
 		</div>
 	</nav>
-    <div class="row row-offcanvas row-offcanvas-left">
+    <div class="row row-offcanvas row-offcanvas-left" style="margin-bottom: 20px;">
         <!-- sidebar -->
         <div class="column col-sm-3 col-xs-1" style="height: 100%;">
         	<nav class="navbar navbar-inverse" style="height: 100%;">
