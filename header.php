@@ -54,7 +54,7 @@ $index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
         	<nav class="navbar navbar-inverse" style="height: 100%;">
 				<ul id="nav-tabs-wrapper" class="nav navbar-nav navbar-inverse nav-tabs nav-pills nav-stacked" style="width: 100%;">
 					<?php if(check_staff()) { ?>
-	            	<li style="width: inherit;"><a href="manage-categories"><b>จัดการสินค้า</b></a></li>
+	            	<li style="width: inherit;"><a href="management"><b>จัดการสินค้า</b></a></li>
 	            	<?php } ?>
 	            	<?php 
 	            		$categories_list = mysql_fetch_data("SELECT * FROM product_categories ORDER BY sort");

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.0.10.7
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 01, 2017 at 06:25 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.5.37
+-- Host: localhost
+-- Generation Time: Mar 02, 2017 at 11:37 AM
+-- Server version: 5.5.40-cll
+-- PHP Version: 5.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `tmpnwg_crayfish`
@@ -26,13 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `address_amphur`
 --
 
-CREATE TABLE `address_amphur` (
-  `AMPHUR_ID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `address_amphur` (
+  `AMPHUR_ID` int(5) NOT NULL AUTO_INCREMENT,
   `AMPHUR_CODE` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `AMPHUR_NAME` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `GEO_ID` int(5) NOT NULL DEFAULT '0',
-  `PROVINCE_ID` int(5) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `PROVINCE_ID` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`AMPHUR_ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=999 ;
 
 --
 -- Dumping data for table `address_amphur`
@@ -971,7 +972,8 @@ INSERT INTO `address_amphur` (`AMPHUR_ID`, `AMPHUR_CODE`, `AMPHUR_NAME`, `GEO_ID
 (930, '9013', 'ควนเนียง   ', 6, 70),
 (931, '9014', 'บางกล่ำ   ', 6, 70),
 (932, '9015', 'สิงหนคร   ', 6, 70),
-(933, '9016', 'คลองหอยโข่ง   ', 6, 70),
+(933, '9016', 'คลองหอยโข่ง   ', 6, 70);
+INSERT INTO `address_amphur` (`AMPHUR_ID`, `AMPHUR_CODE`, `AMPHUR_NAME`, `GEO_ID`, `PROVINCE_ID`) VALUES
 (934, '9077', 'ท้องถิ่นเทศบาลตำบลสำนักขาม   ', 6, 70),
 (935, '9096', 'เทศบาลตำบลบ้านพรุ   ', 6, 70),
 (936, '9101', 'เมืองสตูล   ', 6, 71),
@@ -1044,14 +1046,15 @@ INSERT INTO `address_amphur` (`AMPHUR_ID`, `AMPHUR_CODE`, `AMPHUR_NAME`, `GEO_ID
 -- Table structure for table `address_district`
 --
 
-CREATE TABLE `address_district` (
-  `DISTRICT_ID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `address_district` (
+  `DISTRICT_ID` int(5) NOT NULL AUTO_INCREMENT,
   `DISTRICT_CODE` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   `DISTRICT_NAME` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `AMPHUR_ID` int(5) NOT NULL DEFAULT '0',
   `PROVINCE_ID` int(5) NOT NULL DEFAULT '0',
-  `GEO_ID` int(5) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `GEO_ID` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`DISTRICT_ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8861 ;
 
 --
 -- Dumping data for table `address_district`
@@ -1953,7 +1956,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (893, '170606', 'ท่างาม   ', 114, 8, 2),
 (894, '170607', 'น้ำตาล   ', 114, 8, 2),
 (895, '170608', 'ทองเอน   ', 114, 8, 2),
-(896, '170609', 'ห้วยชัน   ', 114, 8, 2),
+(896, '170609', 'ห้วยชัน   ', 114, 8, 2);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (897, '170610', 'โพธิ์ชัย   ', 114, 8, 2),
 (898, '180101', 'ในเมือง   ', 115, 9, 2),
 (899, '180102', 'บ้านกล้วย   ', 115, 9, 2),
@@ -2289,8 +2293,7 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (1229, '210402', 'ชุมแสง   ', 154, 12, 5),
 (1230, '210403', 'ป่ายุบใน   ', 154, 12, 5),
 (1231, '210404', 'พลงตาเอี่ยม   ', 154, 12, 5),
-(1232, '210501', 'บ้านค่าย   ', 155, 12, 5);
-INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
+(1232, '210501', 'บ้านค่าย   ', 155, 12, 5),
 (1233, '210502', 'หนองละลอก   ', 155, 12, 5),
 (1234, '210503', 'หนองตะพาน   ', 155, 12, 5),
 (1235, '210504', 'ตาขัน   ', 155, 12, 5),
@@ -2814,7 +2817,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (1753, '270801', 'โคกสูง   ', 213, 18, 5),
 (1754, '270802', 'หนองม่วง   ', 213, 18, 5),
 (1755, '270803', 'หนองแวง   ', 213, 18, 5),
-(1756, '270804', 'โนนหมากมุ่น   ', 213, 18, 5),
+(1756, '270804', 'โนนหมากมุ่น   ', 213, 18, 5);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (1757, '270901', 'วังสมบูรณ์   ', 214, 18, 5),
 (1758, '270902', 'วังใหม่   ', 214, 18, 5),
 (1759, '270903', 'วังทอง   ', 214, 18, 5),
@@ -3462,8 +3466,7 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (2401, '320512', 'เชื้อเพลิง   ', 277, 21, 3),
 (2402, '320513', 'ปราสาททนง   ', 277, 21, 3),
 (2403, '320514', 'ตานี   ', 277, 21, 3),
-(2404, '320515', 'บ้านพลวง   ', 277, 21, 3);
-INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
+(2404, '320515', 'บ้านพลวง   ', 277, 21, 3),
 (2405, '320516', 'กันตวจระมวล   ', 277, 21, 3),
 (2406, '320517', 'สมุด   ', 277, 21, 3),
 (2407, '320518', 'ประทัดบุ   ', 277, 21, 3),
@@ -3700,7 +3703,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (2638, '330519', 'ตะเคียนราม   ', 294, 22, 3),
 (2639, '330520', 'ห้วยติ๊กชู   ', 294, 22, 3),
 (2640, '330521', 'สำโรงตาเจ็น   ', 294, 22, 3),
-(2641, '330522', 'ห้วยสำราญ   ', 294, 22, 3),
+(2641, '330522', 'ห้วยสำราญ   ', 294, 22, 3);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (2642, '330523', 'ดงรัก   ', 294, 22, 3),
 (2643, '330524', 'กฤษณา   ', 294, 22, 3),
 (2644, '330525', 'ลมศักดิ์   ', 294, 22, 3),
@@ -4591,7 +4595,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (3529, '400407', 'กุดกว้าง   ', 396, 28, 3),
 (3530, '400408', 'โนนทัน   ', 396, 28, 3),
 (3531, '400409', 'โนนสะอาด   ', 396, 28, 3),
-(3532, '400410', 'บ้านผือ   ', 396, 28, 3),
+(3532, '400410', 'บ้านผือ   ', 396, 28, 3);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (3533, '400501', 'ชุมแพ   ', 397, 28, 3),
 (3534, '400502', 'โนนหัน   ', 397, 28, 3),
 (3535, '400503', 'นาหนองทุ่ม   ', 397, 28, 3),
@@ -4654,8 +4659,7 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (3592, '401006', 'เปือยใหญ่   ', 402, 28, 3),
 (3593, '401007', 'โนนศิลา   ', 402, 28, 3),
 (3594, '401008', 'บ้านหัน   ', 402, 28, 3),
-(3595, '401009', 'บ้านลาน   ', 402, 28, 3);
-INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
+(3595, '401009', 'บ้านลาน   ', 402, 28, 3),
 (3596, '401010', 'แคนเหนือ   ', 402, 28, 3),
 (3597, '401011', 'ภูเหล็ก   ', 402, 28, 3),
 (3598, '401012', 'หนองแซง   ', 402, 28, 3),
@@ -5471,7 +5475,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (4408, '450111', 'ดงสิงห์   ', 491, 33, 3),
 (4409, '450112', 'สวนจิก   ', 491, 33, 3),
 (4410, '450113', 'ม่วงลาด   ', 491, 33, 3),
-(4411, '450114', 'โพธิ์ทอง   ', 491, 33, 3),
+(4411, '450114', 'โพธิ์ทอง   ', 491, 33, 3);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (4412, '450115', 'จังหาร   ', 491, 33, 3),
 (4413, '450116', 'ดินดำ   ', 491, 33, 3),
 (4414, '450117', 'หนองแก้ว   ', 491, 33, 3),
@@ -5835,8 +5840,7 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (4772, '461402', 'ไค้นุ่น   ', 524, 34, 3),
 (4773, '461403', 'นิคมห้วยผึ้ง   ', 524, 34, 3),
 (4774, '461404', 'หนองอีบุตร   ', 524, 34, 3),
-(4775, '461501', 'สำราญ   ', 525, 34, 3);
-INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
+(4775, '461501', 'สำราญ   ', 525, 34, 3),
 (4776, '461502', 'สำราญใต้   ', 525, 34, 3),
 (4777, '461503', 'คำสร้างเที่ยง   ', 525, 34, 3),
 (4778, '461504', 'หนองช้าง   ', 525, 34, 3),
@@ -6350,7 +6354,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (5286, '501412', 'ป่าไผ่   ', 581, 38, 1),
 (5287, '501501', 'หางดง   ', 582, 38, 1),
 (5288, '501502', 'หนองแก๋ว   ', 582, 38, 1),
-(5289, '501503', 'หารแก้ว   ', 582, 38, 1),
+(5289, '501503', 'หารแก้ว   ', 582, 38, 1);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (5290, '501504', 'หนองตอง   ', 582, 38, 1),
 (5291, '501505', 'ขุนคง   ', 582, 38, 1),
 (5292, '501506', 'สบแม่ข่า   ', 582, 38, 1),
@@ -7020,8 +7025,7 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (5956, '570598', 'สันมะค่า   ', 661, 45, 1),
 (5957, '570599', 'ป่าแดด   ', 661, 45, 1),
 (5958, '570601', 'ป่าแดด   ', 662, 45, 1),
-(5959, '570602', 'ป่าแงะ   ', 662, 45, 1);
-INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
+(5959, '570602', 'ป่าแงะ   ', 662, 45, 1),
 (5960, '570603', 'สันมะค่า   ', 662, 45, 1),
 (5961, '570605', 'โรงช้าง   ', 662, 45, 1),
 (5962, '570606', 'ศรีโพธิ์เงิน   ', 662, 45, 1),
@@ -7238,7 +7242,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (6173, '600903', 'วังน้ำลัด   ', 691, 47, 2),
 (6174, '600904', 'ตะคร้อ   ', 691, 47, 2),
 (6175, '600905', 'โพธิ์ประสาท   ', 691, 47, 2),
-(6176, '600906', 'วังข่อย   ', 691, 47, 2),
+(6176, '600906', 'วังข่อย   ', 691, 47, 2);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (6177, '600907', 'นาขอม   ', 691, 47, 2),
 (6178, '600908', 'ไพศาลี   ', 691, 47, 2),
 (6179, '601001', 'พยุหะ   ', 692, 47, 2),
@@ -8098,7 +8103,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (7033, '710305', 'หลุมรัง   ', 784, 56, 4),
 (7034, '710306', 'หนองปลาไหล   ', 784, 56, 4),
 (7035, '710307', 'สมเด็จเจริญ   ', 784, 56, 4),
-(7036, '710308', 'ช่องด่าน   ', 784, 56, 4),
+(7036, '710308', 'ช่องด่าน   ', 784, 56, 4);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (7037, '710309', 'หนองกร่าง   ', 784, 56, 4),
 (7038, '710401', 'นาสวน   ', 785, 56, 4),
 (7039, '710402', 'ด่านแม่แฉลบ   ', 785, 56, 4),
@@ -8190,8 +8196,7 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (7125, '720112', 'บ้านโพธิ์   ', 797, 57, 2),
 (7126, '720113', 'สระแก้ว   ', 797, 57, 2),
 (7127, '720114', 'ตลิ่งชัน   ', 797, 57, 2),
-(7128, '720115', 'บางกุ้ง   ', 797, 57, 2);
-INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
+(7128, '720115', 'บางกุ้ง   ', 797, 57, 2),
 (7129, '720116', 'ศาลาขาว   ', 797, 57, 2),
 (7130, '720117', 'สวนแตง   ', 797, 57, 2),
 (7131, '720118', 'สนามชัย   ', 797, 57, 2),
@@ -8958,7 +8963,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (7892, '820601', 'คุระ   ', 877, 65, 6),
 (7893, '820602', 'บางวัน   ', 877, 65, 6),
 (7894, '820603', 'เกาะพระทอง   ', 877, 65, 6),
-(7895, '820604', 'เกาะคอเขา   ', 877, 65, 6),
+(7895, '820604', 'เกาะคอเขา   ', 877, 65, 6);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (7896, '820605', 'แม่นางขาว   ', 877, 65, 6),
 (7897, '820701', 'ทับปุด   ', 878, 65, 6),
 (7898, '820702', 'มะรุ่ย   ', 878, 65, 6),
@@ -9367,8 +9373,7 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (8301, '901113', 'ท่าข้าม   ', 928, 70, 6),
 (8302, '901114', 'น้ำน้อย   ', 928, 70, 6),
 (8303, '901115', 'บางกล่ำ   ', 928, 70, 6),
-(8304, '901116', 'บ้านพรุ   ', 928, 70, 6);
-INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
+(8304, '901116', 'บ้านพรุ   ', 928, 70, 6),
 (8305, '901117', 'บ้านหาร   ', 928, 70, 6),
 (8306, '901118', 'พะตง   ', 928, 70, 6),
 (8307, '901119', 'แม่ทอม   ', 928, 70, 6),
@@ -9853,7 +9858,8 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 (8786, '960204', 'ศาลาใหม่   ', 986, 76, 6),
 (8787, '960205', 'บางขุนทอง   ', 986, 76, 6),
 (8788, '960206', 'เกาะสะท้อน   ', 986, 76, 6),
-(8789, '960207', 'นานาค   ', 986, 76, 6),
+(8789, '960207', 'นานาค   ', 986, 76, 6);
+INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`, `AMPHUR_ID`, `PROVINCE_ID`, `GEO_ID`) VALUES
 (8790, '960208', 'โฆษิต   ', 986, 76, 6),
 (8791, '960301', 'บาเจาะ   ', 987, 76, 6),
 (8792, '960302', 'ลุโบะสาวอ   ', 987, 76, 6),
@@ -9932,10 +9938,11 @@ INSERT INTO `address_district` (`DISTRICT_ID`, `DISTRICT_CODE`, `DISTRICT_NAME`,
 -- Table structure for table `address_geography`
 --
 
-CREATE TABLE `address_geography` (
-  `GEO_ID` int(5) NOT NULL,
-  `GEO_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `address_geography` (
+  `GEO_ID` int(5) NOT NULL AUTO_INCREMENT,
+  `GEO_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`GEO_ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `address_geography`
@@ -9955,12 +9962,13 @@ INSERT INTO `address_geography` (`GEO_ID`, `GEO_NAME`) VALUES
 -- Table structure for table `address_province`
 --
 
-CREATE TABLE `address_province` (
-  `PROVINCE_ID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `address_province` (
+  `PROVINCE_ID` int(5) NOT NULL AUTO_INCREMENT,
   `PROVINCE_CODE` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `PROVINCE_NAME` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `GEO_ID` int(5) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `GEO_ID` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`PROVINCE_ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=78 ;
 
 --
 -- Dumping data for table `address_province`
@@ -10051,13 +10059,15 @@ INSERT INTO `address_province` (`PROVINCE_ID`, `PROVINCE_CODE`, `PROVINCE_NAME`,
 -- Table structure for table `person`
 --
 
-CREATE TABLE `person` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `person` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(32) NOT NULL,
   `date_created` datetime NOT NULL,
-  `last_login` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `last_login` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `person`
@@ -10073,11 +10083,14 @@ INSERT INTO `person` (`id`, `email`, `password`, `date_created`, `last_login`) V
 -- Table structure for table `product_categories`
 --
 
-CREATE TABLE `product_categories` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `product_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `sort` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `sort` int(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `sort` (`sort`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `product_categories`
@@ -10085,10 +10098,23 @@ CREATE TABLE `product_categories` (
 
 INSERT INTO `product_categories` (`id`, `name`, `sort`) VALUES
 (1, 'ทดสอบ', 1),
-(7, 'gegr', 2),
-(11, 'fdvfd', 3),
-(12, 'd', 4),
-(13, 'gregre', 5);
+(26, 'hrthtr', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_sub_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `product_sub_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `sort` int(3) NOT NULL,
+  `cat_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `sort` (`sort`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 -- --------------------------------------------------------
 
@@ -10096,7 +10122,7 @@ INSERT INTO `product_categories` (`id`, `name`, `sort`) VALUES
 -- Table structure for table `staff_list`
 --
 
-CREATE TABLE `staff_list` (
+CREATE TABLE IF NOT EXISTS `staff_list` (
   `uid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -10113,8 +10139,8 @@ INSERT INTO `staff_list` (`uid`) VALUES
 -- Table structure for table `users_data`
 --
 
-CREATE TABLE `users_data` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
   `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -10130,8 +10156,10 @@ CREATE TABLE `users_data` (
   `AMPHUR_ID` int(5) NOT NULL,
   `DISTRICT_ID` int(5) NOT NULL,
   `post_code` int(8) NOT NULL,
-  `phone` varchar(16) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `phone` varchar(16) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uid` (`uid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `users_data`
@@ -10141,95 +10169,6 @@ INSERT INTO `users_data` (`id`, `uid`, `firstname`, `lastname`, `building`, `roo
 (8, 32, 'ณัฐดนัย', 'ทองคำปั้น', 'อาคาร', '1', '99', 'Huay Khwang', 7, 'ทดทด', 'สอบ', 'บางถนน', 1, 18, 120, 10310, '02123456'),
 (10, 34, 'ณัฐดนัย', 'ทองคำปั้น', '', '', '', '44/44', 7, '', '', '', 3, 59, 313, 11111, '02123456');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `address_amphur`
---
-ALTER TABLE `address_amphur`
-  ADD PRIMARY KEY (`AMPHUR_ID`);
-
---
--- Indexes for table `address_district`
---
-ALTER TABLE `address_district`
-  ADD PRIMARY KEY (`DISTRICT_ID`);
-
---
--- Indexes for table `address_geography`
---
-ALTER TABLE `address_geography`
-  ADD PRIMARY KEY (`GEO_ID`);
-
---
--- Indexes for table `address_province`
---
-ALTER TABLE `address_province`
-  ADD PRIMARY KEY (`PROVINCE_ID`);
-
---
--- Indexes for table `person`
---
-ALTER TABLE `person`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `product_categories`
---
-ALTER TABLE `product_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD UNIQUE KEY `sort` (`sort`);
-
---
--- Indexes for table `users_data`
---
-ALTER TABLE `users_data`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uid` (`uid`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `address_amphur`
---
-ALTER TABLE `address_amphur`
-  MODIFY `AMPHUR_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=999;
---
--- AUTO_INCREMENT for table `address_district`
---
-ALTER TABLE `address_district`
-  MODIFY `DISTRICT_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8861;
---
--- AUTO_INCREMENT for table `address_geography`
---
-ALTER TABLE `address_geography`
-  MODIFY `GEO_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `address_province`
---
-ALTER TABLE `address_province`
-  MODIFY `PROVINCE_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
---
--- AUTO_INCREMENT for table `person`
---
-ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
---
--- AUTO_INCREMENT for table `product_categories`
---
-ALTER TABLE `product_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `users_data`
---
-ALTER TABLE `users_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
