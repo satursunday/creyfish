@@ -1,9 +1,18 @@
 <?php
 session_start();
+connect_db();
+
+$menu_list = array(
+		"how-to-order" => "วิธีการสั่งซื้อสินค้า"
+		, "payment-confirm" => "แจ้งชำระเงิน"
+		, "blog" => "บทความ"
+		, "about-us" => "เกี่ยวกับเรา"
+		, "contact-us" => "ติดต่อเรา"
+);
+
 require_once("general_functions.php");
 require_once("header.php");
-
-connect_db();
+require_once("footer.php");
 
 function connect_db()
 {

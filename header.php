@@ -22,11 +22,12 @@ $index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
 					}
 				?>
 				<li <?php if(empty($_GET["action"]) || $_GET["action"] == "") echo 'class="active"';?>><a href="<?php echo $index; ?>" class="btn">หน้าแรก</a></li>
-				<li <?php if($_GET["action"] == "how-to-order") echo 'class="active"';?>><a href="how-to-order" class="btn">วิธีการสั่งซื้อสินค้า</a></li>
-				<li <?php if($_GET["action"] == "payment-confirm") echo 'class="active"';?>><a href="payment-confirm" class="btn">แจ้งชำระเงิน</a></li>
-				<li <?php if($_GET["action"] == "blog") echo 'class="active"';?>><a href="blog" class="btn">บทความ</a></li>
-				<li <?php if($_GET["action"] == "about-us") echo 'class="active"';?>><a href="about-us" class="btn">เกี่ยวกับเรา</a></li>
-				<li <?php if($_GET["action"] == "contact-us") echo 'class="active"';?>><a href="contact-us" class="btn">ติดต่อเรา</a></li>
+				<?php 
+					foreach($menu_list as $des => $text){
+						$active = ($_GET["action"] == $des) ? " class=\"active\"" : "";
+						echo '<li' . $active . '><a href="' . $des . '" class="btn">' . $text . '</a></li>';
+					}
+				?>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -59,7 +60,17 @@ $index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
 	            	<?php 
 	            		$categories_list = mysql_fetch_data("SELECT * FROM product_categories ORDER BY sort");
 	            		foreach($categories_list as $foo){
-	            			echo '<li style="width: inherit;"><a href="products/' . $foo["id"] . '/">' . $foo["name"] . '</a></li>';
+	            			echo '<li style="width: inherit;"><a class="newline-word cat-menu" href="javascript:void(0);" data-toggle="collapse" data-target="#demo_' . $foo["id"] . '"><h4><b>' . $foo["name"] . '</b></h4></a></li>';
+	            			?>
+	            			<ul id="demo_<?php echo $foo["id"]; ?>" class="nav navbar-nav navbar-inverse nav-tabs nav-pills nav-stacked collapse" style="width: 100%;">
+	            			<?php 
+	            				$sub_categories_list = mysql_fetch_data("SELECT * FROM product_sub_categories WHERE cat_id = {$foo["id"]} ORDER BY sort");
+	            				foreach($sub_categories_list as $foo2){
+	            					echo '<li style="width: inherit;"><a class="newline-word sub-cat-menu" href="products/' . $foo2["id"] . '/">' . $foo2["name"] . '</a></li>';
+	            				}
+	            			?>
+							</ul>
+	            			<?php 
 	            		}
 	            	?>
 				</ul>
@@ -69,29 +80,62 @@ $index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
 
         <!-- main right col -->
         <div class="column col-sm-9 col-xs-11" id="main">
-            <p class="content">
-            	<div class="container">
-					<div class="row">
-						<div class="col-xs-8">
-		                <?php 
-		                	$directory = dirname(__FILE__). "/templates/";
-		                	if(isset($_GET["action"])){
-			                	$_GET["action"] = trim($_GET["action"]);
-		                	}
-		                	if(file_exists($directory . $_GET["action"] . ".php")){
-		                		require_once($directory . $_GET["action"] . ".php");
-		                	} else if(file_exists($directory . $_GET["action"] . ".html")){
-		                		require_once($directory . $_GET["action"] . ".html");
-		                	} else if(empty($_GET["action"]) || $_GET["action"] == ""){
-		                		require_once(dirname(__FILE__). "/" . "index.php");
-		                	} else {
-		                		require_once("404.html");
-		                	}
-		                ?>
+			<div class="row">
+				<div class="col-xs-12">
+					<?php if(isset($_GET["action"]) && trim($_GET["action"] != "")){ ?>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="<?php echo $index; ?>">หน้าแรก</a></li>
+						<?php 
+						$not_found = true;
+						foreach($menu_list as $des => $text){
+							if($_GET["action"] == $des){
+								echo '<li class="breadcrumb-item active">' . $text . '</li>';
+								$not_found = false;
+								break;
+							}
+						}
+						
+						if($not_found){
+							switch($_GET["action"]){
+								case "management":
+									if(empty($_["cat_id"]) && empty($_GET["sub_cat_id"]) && empty($_GET["id"])){
+										echo '<li class="breadcrumb-item newline-word active">จัดการสินค้า</li>';
+									} else {
+										echo '<li class="breadcrumb-item newline-word"><a href="management">จัดการสินค้า</a></li>';
+									} 
+									
+									if(isset($_GET["id"]) && $_GET["id"] > 0){
+										$categories = mysql_fetch_data("SELECT name FROM product_categories WHERE id = {$_GET["id"]}");
+										echo '<li class="breadcrumb-item newline-word active">' . $categories[0]["name"] . '</li>';
+									} else if(isset($_GET["cat_id"]) && $_GET["cat_id"] > 0 && isset($_GET["sub_cat_id"]) && $_GET["sub_cat_id"] > 0){
+										$categories = mysql_fetch_data("SELECT name FROM product_categories WHERE id = {$_GET["cat_id"]}");
+										$sub_categories = mysql_fetch_data("SELECT name FROM product_sub_categories WHERE id = {$_GET["sub_cat_id"]}");
+										echo '<li class="breadcrumb-item newline-word"><a href="management?id=' . $_GET["cat_id"] . '">' . $categories[0]["name"] . '</a></li>';
+										echo '<li class="breadcrumb-item newline-word active">' . $sub_categories[0]["name"] . '</li>';
+									}
+									break;
+							}
+						}
+						?>
+					</ol>
+					<?php } ?>
+                <?php 
+                	$directory = dirname(__FILE__). "/templates/";
+                	if(isset($_GET["action"])){
+	                	$_GET["action"] = trim($_GET["action"]);
+                	}
+                	if(file_exists($directory . $_GET["action"] . ".php")){
+                		require_once($directory . $_GET["action"] . ".php");
+                	} else if(file_exists($directory . $_GET["action"] . ".html")){
+                		require_once($directory . $_GET["action"] . ".html");
+                	} else if(empty($_GET["action"]) || $_GET["action"] == ""){
+                		require_once(dirname(__FILE__). "/" . "index.php");
+                	} else {
+                		require_once("404.html");
+                	}
+                ?>
                 		</div>
                 	</div>
-                </div>
-            </p>
         </div>
         <!-- /main -->
     </div>

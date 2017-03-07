@@ -6796,4 +6796,41 @@ button.close {
 .mb30 {
 	margin-bottom: 30px;
 }
+
+.cat-menu {
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+}
+
+.sub-cat-menu {
+	padding: 5px 30px !important;
+}
+
+.newline-word {
+	word-wrap: break-word;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 100%;
+}
 /*# sourceMappingURL=bootstrap.css.map */
