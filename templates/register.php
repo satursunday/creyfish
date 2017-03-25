@@ -171,7 +171,7 @@ EOF;
 	</div>     
 	<div style="padding-top:30px" class="panel-body" >
 		<?php if($main_error["status"]) echo "<div class=\"alert alert-danger\">{$main_error["msg"]}</div>"; ?>
-		<form class="form-horizontal" action='#' method="POST">
+		<form class="form-horizontal" action='register' method="POST">
 	  		<fieldset>
 				<legend class="">ข้อมูลล็อกอิน</legend>
 		    	<div class="control-group">

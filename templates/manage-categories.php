@@ -7,7 +7,7 @@ if(isset($_POST["new_cat"]) && trim($_POST["new_cat"]) != ""){
 }
 $categories = mysql_fetch_data("SELECT * FROM product_categories ORDER BY sort");
 echo <<<EOF
-<form action="#" method="POST">
+<form action="management" method="POST">
 EOF;
 
 if(count($categories) > 0){
@@ -28,7 +28,7 @@ foreach($categories as $foo){
 	echo <<<EOF
 	<div class="row mt20">
 		<div class="col-xs-8">
-			<a class="newline-word" href="?id={$foo["id"]}">{$foo["name"]}</a>
+			<a class="newline-word" href="management/{$foo["id"]}/">{$foo["name"]}</a>
 		</div>
 		<div class="col-xs-2">
 			<table>

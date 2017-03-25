@@ -19,7 +19,7 @@ if(isset($_POST["new_sub_cat"]) && trim($_POST["new_sub_cat"]) != ""){
 }
 $categories = mysql_fetch_data("SELECT * FROM product_sub_categories WHERE cat_id = {$cat_id} ORDER BY sort");
 echo <<<EOF
-<form action="#" method="POST">
+<form action="management/{$cat_id}/" method="POST">
 EOF;
 
 if(count($categories) > 0){
@@ -40,7 +40,7 @@ foreach($categories as $foo){
 	echo <<<EOF
 	<div class="row mt20">
 		<div class="col-xs-8">
-			<a class="newline-word" href="?cat_id={$cat_id}&sub_cat_id={$foo["id"]}">{$foo["name"]}</a>
+			<a class="newline-word" href="management/{$cat_id}/sub/{$foo["id"]}/">{$foo["name"]}</a>
 		</div>
 		<div class="col-xs-2">
 			<table>

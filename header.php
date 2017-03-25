@@ -1,12 +1,11 @@
+<base href="<?php echo $base_url; ?>" />
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slides.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css?v=<?php echo rand(); ?>">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<?php 
-$index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
-?>
 <div class="container" style="background-color: #ffffff; height:100$;">
 	<div class="row">
 		<div class="col-xs-12">
@@ -110,8 +109,14 @@ $index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
 									} else if(isset($_GET["cat_id"]) && $_GET["cat_id"] > 0 && isset($_GET["sub_cat_id"]) && $_GET["sub_cat_id"] > 0){
 										$categories = mysql_fetch_data("SELECT name FROM product_categories WHERE id = {$_GET["cat_id"]}");
 										$sub_categories = mysql_fetch_data("SELECT name FROM product_sub_categories WHERE id = {$_GET["sub_cat_id"]}");
-										echo '<li class="breadcrumb-item newline-word"><a href="management?id=' . $_GET["cat_id"] . '">' . $categories[0]["name"] . '</a></li>';
-										echo '<li class="breadcrumb-item newline-word active">' . $sub_categories[0]["name"] . '</li>';
+										echo '<li class="breadcrumb-item newline-word"><a href="management/' . $_GET["cat_id"] . '">' . $categories[0]["name"] . '</a></li>';
+										if(empty($_GET["pid"])){
+											echo '<li class="breadcrumb-item newline-word active">' . $sub_categories[0]["name"] . '</li>';
+										} else {
+											$product= mysql_fetch_data("SELECT title FROM product_detail WHERE id = {$_GET["pid"]}");
+											echo '<li class="breadcrumb-item newline-word"><a href="management/' . $_GET["cat_id"] . '/sub/' . $_GET["sub_cat_id"] . '/">' . $sub_categories[0]["name"] . '</a></li>';
+											echo '<li class="breadcrumb-item newline-word active">' . $product[0]["title"] . '</li>';
+										}
 									}
 									break;
 							}

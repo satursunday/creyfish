@@ -1,4 +1,20 @@
 RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^management/[0-9]*$ [NC,OR]
+RewriteRule ^(management)/?([0-9]*)/?$ index.php?action=$1&id=$2 [NC,L]
+
+RewriteCond %{HTTP_HOST} ^management/[0-9]*/[0-9]*$ [NC,OR]
+RewriteRule ^(management)/?([0-9]*)/sub/([0-9]*)/?$ index.php?action=$1&cat_id=$2&sub_cat_id=$3 [NC,L]
+
+RewriteCond %{HTTP_HOST} ^management/[0-9]*/[0-9]*$ [NC,OR]
+RewriteRule ^(management)/?([0-9]*)/sub/([0-9]*)/product/([0-9]*)/?$ index.php?action=$1&cat_id=$2&sub_cat_id=$3&pid=$4 [NC,L]
+
+RewriteCond %{HTTP_HOST} ^products/[0-9]*$ [NC,OR]
+RewriteRule ^(products)/?([0-9]*)/?$ index.php?action=$1&id=$2 [NC,L]
+
+RewriteCond %{HTTP_HOST} ^products/[0-9]*/product/[0-9]*$ [NC,OR]
+RewriteRule ^(products)/([0-9]*)/product/([0-9]*)/?$ index.php?action=$1&id=$2&pid=$3 [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?action=$1 [L,QSA]

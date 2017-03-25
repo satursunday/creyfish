@@ -17,6 +17,9 @@ if(!check_staff()){
 			case "save_sort_sub_cat":
 				mysql_query("UPDATE `product_sub_categories` SET `sort`= \"{$_POST["sort"]}\" WHERE `id` = {$_POST["id"]}");
 				break;
+			case "remove_product":
+				mysql_query("DELETE FROM `product_detail` WHERE id = {$_POST["pid"]}");
+				break;
 		}
 		exit;
 	}

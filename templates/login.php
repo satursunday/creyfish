@@ -20,7 +20,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
 	</div>     
 	<div style="padding-top:30px" class="panel-body" >
 		<?php if($error) { ?><div class="alert alert-danger">อีเมล์หรือรหัสผ่าน ผิดพลาด</div><?php } ?>
-		<form action="#" method="post" class="form-horizontal">
+		<form action="login" method="post" class="form-horizontal">
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 				<input class="form-control" type="text" name="username" placeholder="E-mail" style="width: 50%;" />
