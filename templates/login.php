@@ -8,6 +8,13 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
 		$_POST["remember"] = false;
 	}
 	if(do_login($_POST["username"], $_POST["password"], $_POST["remember"])){
+		/*
+		if(true || preg_match("/order/", $_SERVER["HTTP_REFERER"])){
+			do_redirect($_SERVER["HTTP_REFERER"]);
+		} else {
+			do_redirect("index");
+		}
+		*/
 		do_redirect("index");
 	} else {
 		$error = true;

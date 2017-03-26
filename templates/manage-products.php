@@ -17,7 +17,7 @@ if(isset($_POST["product-name"])){
 		}
 	}
 	$img = json_encode($img);
-	mysql_query("INSERT INTO `product_detail`(`sub_cat_id`, `title`, `description`, `img`, `amount`, `sell`, `price`, `date_create`) VALUES ('{$sub_cat_id}', {$_POST['product-name']}', '{$_POST['description']}', '{$img}', '{$_POST['amount']}', 0, '{$_POST['price']}', NOW())");
+	mysql_query("INSERT INTO `product_detail`(`sub_cat_id`, `title`, `description`, `img`, `amount`, `price`, `date_created`) VALUES ('{$sub_cat_id}', '{$_POST['product-name']}', '{$_POST['description']}', '{$img}', '{$_POST['amount']}', '{$_POST['price']}', NOW())");
 }
 ?>
 <?php if(empty($_GET["pid"])){ ?>
@@ -106,7 +106,7 @@ if(isset($_POST["product-name"])){
 	<tr>
 	<?php } ?>
 		<td>คงเหลือ</td>
-		<td><?php echo ($product["amount"]-$product["sell"] > 0) ? $product["amount"]-$product["sell"] : '<font color="red">0</font>'; ?></td>
+		<td><?php echo ($product["amount"] > 0) ? $product["amount"] : '<font color="red">0</font>'; ?></td>
 	</tr>
 	<tr>
 		<td>ราคา</td>
@@ -114,7 +114,7 @@ if(isset($_POST["product-name"])){
 	</tr>
 	<tr>
 		<td>สร้างเมื่อ</td>
-		<td><?php echo $product["date_create"]; ?></td>
+		<td><?php echo $product["date_created"]; ?></td>
 	</tr>
 </table>
 <?php } ?>

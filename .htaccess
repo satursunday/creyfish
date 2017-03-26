@@ -15,6 +15,9 @@ RewriteRule ^(products)/?([0-9]*)/?$ index.php?action=$1&id=$2 [NC,L]
 RewriteCond %{HTTP_HOST} ^products/[0-9]*/product/[0-9]*$ [NC,OR]
 RewriteRule ^(products)/([0-9]*)/product/([0-9]*)/?$ index.php?action=$1&id=$2&pid=$3 [NC,L]
 
+RewriteCond %{HTTP_HOST} ^order/[0-9]*/?$ [NC,OR]
+RewriteRule ^(order)/([0-9]*)/?$ index.php?action=$1&pid=$2 [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?action=$1 [L,QSA]

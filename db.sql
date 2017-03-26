@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2017 at 07:35 PM
+-- Generation Time: Mar 26, 2017 at 07:38 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -10064,8 +10064,8 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `email`, `password`, `date_created`, `last_login`) VALUES
-(32, 'd.tongkampan@gmail.com', '6e0c9321b505706b148927f229deb31c', '2017-03-01 01:19:22', '2017-03-08 00:15:58'),
-(34, 'natdanai@netway.co.th', '6e0c9321b505706b148927f229deb31c', '2017-03-01 22:27:14', '2017-03-01 23:24:38');
+(32, 'd.tongkampan@gmail.com', '5f43bba94593dbddf2c79448fb75fb68', '2017-03-01 01:19:22', '2017-03-26 18:09:42'),
+(34, 'natdanai@netway.co.th', '5f43bba94593dbddf2c79448fb75fb68', '2017-03-01 22:27:14', '2017-03-01 23:24:38');
 
 -- --------------------------------------------------------
 
@@ -10084,8 +10084,34 @@ CREATE TABLE `product_categories` (
 --
 
 INSERT INTO `product_categories` (`id`, `name`, `sort`) VALUES
-(26, 'hrthtr', 2),
-(27, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1);
+(30, 'กุ้ง', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_detail`
+--
+
+CREATE TABLE `product_detail` (
+  `id` int(11) NOT NULL,
+  `sub_cat_id` int(11) NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `img` varchar(255) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `date_created` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_detail`
+--
+
+INSERT INTO `product_detail` (`id`, `sub_cat_id`, `title`, `description`, `img`, `amount`, `price`, `date_created`) VALUES
+(13, 79, 'กุ้งไง', 'ก็กุ้งอะ', '["php83F6_download.jpg","php83F7_external.jpg"]', 2, '230.12', '2017-03-26 17:46:38'),
+(14, 79, 'กุ้งครับ', 'กุ้งจ้า', '["php5DB9_Ghost-Crayfish_1024x1024.jpg"]', 2, '50', '2017-03-26 17:48:39'),
+(16, 79, 'กุ้งกุ้ง', 'fef', '["php211B_download.jpg"]', 123, '111', '2017-03-26 17:49:29'),
+(17, 79, 'กุ้งกุ้ง', 'fef', '["php7AB6_download.jpg"]', 123, '111', '2017-03-26 17:49:52');
 
 -- --------------------------------------------------------
 
@@ -10105,8 +10131,7 @@ CREATE TABLE `product_sub_categories` (
 --
 
 INSERT INTO `product_sub_categories` (`id`, `name`, `sort`, `cat_id`) VALUES
-(46, 'ffnewline-wordffnewline-wordffnewline-word', 1, 27),
-(55, 'dddd', 1, 26);
+(79, 'crayfish', 1, 30);
 
 -- --------------------------------------------------------
 
@@ -10203,6 +10228,12 @@ ALTER TABLE `product_categories`
   ADD UNIQUE KEY `sort` (`sort`);
 
 --
+-- Indexes for table `product_detail`
+--
+ALTER TABLE `product_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product_sub_categories`
 --
 ALTER TABLE `product_sub_categories`
@@ -10249,12 +10280,17 @@ ALTER TABLE `person`
 -- AUTO_INCREMENT for table `product_categories`
 --
 ALTER TABLE `product_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `product_detail`
+--
+ALTER TABLE `product_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `product_sub_categories`
 --
 ALTER TABLE `product_sub_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT for table `users_data`
 --

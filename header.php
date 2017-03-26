@@ -1,3 +1,8 @@
+<?php 
+if(isset($_POST["action"]) && isset($_GET["action"]) && $_GET["action"] == "cart"){
+	require_once(dirname(__FILE__). "/templates/" . "cart.php");
+}
+?>
 <base href="<?php echo $base_url; ?>" />
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -6,13 +11,13 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<div class="container" style="background-color: #ffffff; height:100$;">
-	<div class="row">
-		<div class="col-xs-12">
-			<a href="<?php echo $index; ?>"><img src="images/banner.png" width="100%" /></a>
+<div class="container" style="background-color: #fff; height:100$;">
+	<div class="row" align="center" style="background-color: #d9d9d9;">
+		<div class="col-xs-12" style="cursor: pointer;" onclick="window.location = '<?php echo $index; ?>';">
+			<img src="images/banner.png" width="45%" height="45%" style="margin-top: 60px; margin-bottom: 60px;"/>
 		</div>
 	</div>
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse mt-20">
 		<div class="container-fluid">
 			<ul class="nav navbar-nav"> 
 				<?php 
@@ -31,6 +36,7 @@
 			
 			<ul class="nav navbar-nav navbar-right">
 				<?php if(isset($_SESSION["user_login"]) && count($_SESSION["user_login"])) { ?>
+				<li><a href="cart" class="btn">ตะกร้าสินค้า<span id="cart-badge" class="badge"><?php echo isset($_SESSION["cart"][$_SESSION["user_login"]["id"]]) ? count($_SESSION["cart"][$_SESSION["user_login"]["id"]]) : 0; ?></span></a></li>
 				<li class="dropdown">
 		        	<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $_SESSION["user_login"]["firstname"] . " " . $_SESSION["user_login"]["lastname"]; ?>
 		        		<span class="caret"></span>
@@ -41,7 +47,7 @@
 			          <?php } ?>
 			          <li><a href="logout" class="btn">ออกจากระบบ</a></li>
 			        </ul>
-			      </li>
+				</li>
 				<?php } else { ?>
         		<li <?php if($_GET["action"] == "login") echo 'class="active"';?>><a href="login" class="btn">เข้าสู่ระบบ</a></li>
         		<?php } ?>
@@ -134,7 +140,7 @@
                 	} else if(file_exists($directory . $_GET["action"] . ".html")){
                 		require_once($directory . $_GET["action"] . ".html");
                 	} else if(empty($_GET["action"]) || $_GET["action"] == ""){
-                		require_once(dirname(__FILE__). "/" . "index.php");
+                		require_once($directory . "main.php");
                 	} else {
                 		require_once("404.html");
                 	}

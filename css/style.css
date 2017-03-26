@@ -1,3 +1,7 @@
+.clearit {
+	clear: both;
+}
+
 .mt-10 {
 	margin-top: 10;
 }
@@ -36,6 +40,14 @@
 .p-box-title {
 	text-align: center;
 	font-size: 18px;
+}
+
+.p-sold-out {
+	position: absolute;
+    z-index: 100;
+    width: 100%;
+    left: 0;
+    top: 32px;
 }
 
 .p-description tr td {

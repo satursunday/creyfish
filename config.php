@@ -10,6 +10,10 @@ $menu_list = array(
 		, "contact-us" => "ติดต่อเรา"
 );
 
+$index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
+$base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] .  $index;
+$img_path = $base_url . '/images/products/';
+
 require_once("general_functions.php");
 require_once("header.php");
 require_once("footer.php");
