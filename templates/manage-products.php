@@ -9,9 +9,9 @@ if(isset($_POST["product-name"])){
 	foreach($_FILES as $foo){
 		if($foo["size"] > 0){
 			$file_content = file_get_contents($foo["tmp_name"]);
-			preg_match_all('/.*\\\tmp\\\(.*\.tmp)/', $foo["tmp_name"], $tmp_name, PREG_SET_ORDER);
+			preg_match_all('/' . platformSlashes('.*\/tmp\/(.*(\.tmp)?)') . '/', $foo["tmp_name"], $tmp_name, PREG_SET_ORDER);
 			$tmp_name = str_replace('.tmp', '', $tmp_name[0][1]);
-			$img_path = dirname(__FILE__) . '\\..\\images\\products\\' . $tmp_name . '_' . $foo["name"];
+			$img_path = dirname(__FILE__) . platformSlashes('/../images/products/') . $tmp_name . '_' . $foo["name"];
 			file_put_contents($img_path, $file_content);	
 			array_push($img, $tmp_name . '_' . $foo["name"]);
 		}
@@ -36,7 +36,8 @@ if(isset($_POST["product-name"])){
 	<?php } ?>
 </table>
 	
-<div class="col-md-12" style="border: 1px solid #DDDDDD; border-radius: 5px; margin-top: 30px;">
+<button class="btn btn-success" onclick="$('#add-product').show(); $(this).hide();">เพิ่มสินค้า</button>
+<div class="col-md-12" id="add-product" style="border: 1px solid #DDDDDD; border-radius: 5px; margin-top: 30px; display: none;">
 	<form action="management/<?php echo $cat_id; ?>/sub/<?php echo $sub_cat_id; ?>/" method="POST" enctype="multipart/form-data">
 		<h3 class="dark-grey">เพิ่มสินค้า</h3>
 			
@@ -101,7 +102,7 @@ if(isset($_POST["product-name"])){
 	<?php foreach($img as $i => $fi){ ?>
 	<tr>
 		<td>รูปสินค้า <?php echo $i+1; ?></td>
-		<td><img src="<?php echo $img_path . $fi; ?>" /></td>
+		<td><img src="<?php echo $img_path . $fi; ?>" width="100%" /></td>
 	</tr>
 	<tr>
 	<?php } ?>
@@ -123,7 +124,7 @@ if(isset($_POST["product-name"])){
 function remove_product(pid)
 {
 	$.post("management", {action: 'remove_product', pid: pid}).done(function(data){
-		location.reload();
+		window.location = window.location.href;
 	});
 }
 </script>

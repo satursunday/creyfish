@@ -45,6 +45,7 @@ if(isset($_POST["action"]) && isset($_GET["action"]) && $_GET["action"] == "cart
 			          <?php if(check_staff()) { ?>
 			          <li><a href="staff" class="btn">สำหรับเจ้าหน้าที่</a></li>
 			          <?php } ?>
+			          <li><a href="orderlog" class="btn">รายการสั่งซื้อ</a></li>
 			          <li><a href="logout" class="btn">ออกจากระบบ</a></li>
 			        </ul>
 				</li>

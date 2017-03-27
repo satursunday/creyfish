@@ -83,7 +83,7 @@ if(isset($_SESSION["cart"][$_SESSION["user_login"]["id"]])){
 					</p>
 				</td>
 				<td><p style="margin-top: 50%;"><input style="text-align: center;" class="form-control" onchange="calculatePrice($(this).val(), {$foo["price"]}, {$foo["id"]});" type="number" value="{$foo["need"]}" min="0" max="{$foo["amount"]}" /></p></td>
-				<td><p id="p_{$foo["id"]}" style="margin-top: 25%; text-align: center;">{$total}<a href="javascript:void(0);" onclick="removeCartItem({$foo["id"]});" style="margin-left: 20px;">x</a></td>
+				<td><p style="margin-top: 25%; text-align: center;"><span id="p_{$foo["id"]}">{$total}</span><a href="javascript:void(0);" onclick="removeCartItem({$foo["id"]});" style="margin-left: 20px;">x</a></td>
 			</tr>
 EOF;
 			?>

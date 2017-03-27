@@ -11,7 +11,7 @@ $menu_list = array(
 );
 
 $index = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
-$base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] .  $index;
+$base_url = siteURL() .  $index;
 $img_path = $base_url . '/images/products/';
 
 require_once("general_functions.php");
@@ -30,6 +30,13 @@ function connect_db()
 	
 	mysql_select_db($db, $con) or die("Database not found.");
 	mysql_query("SET NAMES UTF8");
+}
+
+function siteURL()
+{
+	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+	$domainName = $_SERVER['HTTP_HOST'];
+	return $protocol.$domainName;
 }
 
 ?>

@@ -18,6 +18,11 @@ if(!check_staff()){
 				mysql_query("UPDATE `product_sub_categories` SET `sort`= \"{$_POST["sort"]}\" WHERE `id` = {$_POST["id"]}");
 				break;
 			case "remove_product":
+				$productImg = mysql_fetch_data("SELECT img FROM product_detail WHERE id = {$_POST["pid"]}");
+				$productImg = json_decode($productImg[0]["img"], true);
+				foreach($productImg as $img){
+					unlink(dirname(__FILE__) . platformSlashes('/../images/products/') . $img);
+				}
 				mysql_query("DELETE FROM `product_detail` WHERE id = {$_POST["pid"]}");
 				break;
 		}
