@@ -95,7 +95,7 @@ EOF;
 			</tr>
 		</table>
 		<div align="center">
-			<button class="btn btn-success">สั่งซื้อ</button>
+			<a href="order" class="btn btn-success">สั่งซื้อ</a>
 		</div>
 	</div>
 </div>

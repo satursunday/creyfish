@@ -1,15 +1,22 @@
 <?php 
 if(isset($_POST["action"]) && isset($_GET["action"]) && $_GET["action"] == "cart"){
 	require_once(dirname(__FILE__). "/templates/" . "cart.php");
+} else if(isset($_POST["id"]) && isset($_GET["action"]) && $_GET["action"] == "payment-confirm"){
+	require_once(dirname(__FILE__). "/templates/" . "payment-confirm.php");
+} else if(isset($_POST["action"]) && isset($_GET["action"]) && $_GET["action"] == "orderlist"){
+	require_once(dirname(__FILE__). "/templates/" . "orderlist.php");
 }
 ?>
 <base href="<?php echo $base_url; ?>" />
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css?v=<?php echo rand(); ?>">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <div class="container" style="background-color: #fff; height:100$;">
 	<div class="row" align="center" style="background-color: #d9d9d9;">
@@ -45,7 +52,7 @@ if(isset($_POST["action"]) && isset($_GET["action"]) && $_GET["action"] == "cart
 			          <?php if(check_staff()) { ?>
 			          <li><a href="staff" class="btn">สำหรับเจ้าหน้าที่</a></li>
 			          <?php } ?>
-			          <li><a href="orderlog" class="btn">รายการสั่งซื้อ</a></li>
+			          <li><a href="orderlist" class="btn">รายการสั่งซื้อ</a></li>
 			          <li><a href="logout" class="btn">ออกจากระบบ</a></li>
 			        </ul>
 				</li>

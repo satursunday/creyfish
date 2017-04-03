@@ -1,4 +1,5 @@
 <?php
+define("DB_NAME", "tmpnwg_crayfish");
 session_start();
 connect_db();
 
@@ -24,7 +25,7 @@ function connect_db()
 	$user = "root"; //tmpnwg_admin
 	$pwd = ""; //anancrayfish
 	
-	$db = "tmpnwg_crayfish";
+	$db = DB_NAME;
 	
 	$con = mysql_connect($server, $user, $pwd) or die("Could not connect to Database.");
 	

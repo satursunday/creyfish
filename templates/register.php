@@ -107,7 +107,7 @@ EOF;
 				
 ขอบคุณที่สมัครสมาชิกกับเรา
 EOF;
-				send_mail("ยินดีต้อนรับสู่ The Spirit of Crayfish", $msg, $email, $firstname . ' ' . $lastname);
+				send_mail("ยินดีต้อนรับสู่ Crayfish By Red Baron", $msg, $email, $firstname . ' ' . $lastname);
 				do_redirect("login");
 			} else {
 				$main_error = array("status" => true, "msg" => "เกิดข้อผิดพลาด ไม่สามารถสมัครสมาชิกได้ โปรดติดต่อเจ้าหน้าที่");
@@ -182,7 +182,7 @@ EOF;
 			      		</div>
 		      		</div>
 		      		<div class="col-sm-6 col-xs-12">
-		      			<a id="val_email" style="display: none;" href="javascript:void(0);" onclick="validate_email();">ตรวจสอบ</a>
+		      			<!-- <a id="val_email" style="display: none;" href="javascript:void(0);" onclick="validate_email();">ตรวจสอบ</a> -->
 		      		</div>
 		      		<div style="clear: both;"></div>
 		    	</div>

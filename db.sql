@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2017 at 07:38 PM
+-- Generation Time: Apr 03, 2017 at 08:49 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -10048,6 +10048,57 @@ INSERT INTO `address_province` (`PROVINCE_ID`, `PROVINCE_CODE`, `PROVINCE_NAME`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `id` int(11) NOT NULL,
+  `status` enum('pending','pending_payment_confirm','pending_transport','transported') NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `total` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `status` enum('pending','completed','cancelled','') NOT NULL,
+  `tracking` varchar(20) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `invoice_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `uid`, `status`, `tracking`, `date_created`, `invoice_id`) VALUES
+(1, 32, 'completed', 'ABCDEF', '2017-04-03 00:00:00', 1),
+(2, 32, 'cancelled', '', '2017-04-03 00:00:00', 2),
+(3, 39, 'completed', 'test', '2017-04-04 00:00:00', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_transfer`
+--
+
+CREATE TABLE `payment_transfer` (
+  `order_id` int(11) NOT NULL,
+  `total_transfer` double NOT NULL,
+  `date_transfer` datetime NOT NULL,
+  `date_created` datetime NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `person`
 --
 
@@ -10058,14 +10109,6 @@ CREATE TABLE `person` (
   `date_created` datetime NOT NULL,
   `last_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `person`
---
-
-INSERT INTO `person` (`id`, `email`, `password`, `date_created`, `last_login`) VALUES
-(32, 'd.tongkampan@gmail.com', '5f43bba94593dbddf2c79448fb75fb68', '2017-03-01 01:19:22', '2017-03-26 18:09:42'),
-(34, 'natdanai@netway.co.th', '5f43bba94593dbddf2c79448fb75fb68', '2017-03-01 22:27:14', '2017-03-01 23:24:38');
 
 -- --------------------------------------------------------
 
@@ -10078,13 +10121,6 @@ CREATE TABLE `product_categories` (
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `sort` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `product_categories`
---
-
-INSERT INTO `product_categories` (`id`, `name`, `sort`) VALUES
-(30, 'กุ้ง', 1);
 
 -- --------------------------------------------------------
 
@@ -10103,16 +10139,6 @@ CREATE TABLE `product_detail` (
   `date_created` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `product_detail`
---
-
-INSERT INTO `product_detail` (`id`, `sub_cat_id`, `title`, `description`, `img`, `amount`, `price`, `date_created`) VALUES
-(13, 79, 'กุ้งไง', 'ก็กุ้งอะ', '["php83F6_download.jpg","php83F7_external.jpg"]', 2, '230.12', '2017-03-26 17:46:38'),
-(14, 79, 'กุ้งครับ', 'กุ้งจ้า', '["php5DB9_Ghost-Crayfish_1024x1024.jpg"]', 2, '50', '2017-03-26 17:48:39'),
-(16, 79, 'กุ้งกุ้ง', 'fef', '["php211B_download.jpg"]', 123, '111', '2017-03-26 17:49:29'),
-(17, 79, 'กุ้งกุ้ง', 'fef', '["php7AB6_download.jpg"]', 123, '111', '2017-03-26 17:49:52');
-
 -- --------------------------------------------------------
 
 --
@@ -10126,13 +10152,6 @@ CREATE TABLE `product_sub_categories` (
   `cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `product_sub_categories`
---
-
-INSERT INTO `product_sub_categories` (`id`, `name`, `sort`, `cat_id`) VALUES
-(79, 'crayfish', 1, 30);
-
 -- --------------------------------------------------------
 
 --
@@ -10142,13 +10161,6 @@ INSERT INTO `product_sub_categories` (`id`, `name`, `sort`, `cat_id`) VALUES
 CREATE TABLE `staff_list` (
   `uid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `staff_list`
---
-
-INSERT INTO `staff_list` (`uid`) VALUES
-(32);
 
 -- --------------------------------------------------------
 
@@ -10177,14 +10189,6 @@ CREATE TABLE `users_data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users_data`
---
-
-INSERT INTO `users_data` (`id`, `uid`, `firstname`, `lastname`, `building`, `room`, `floor`, `house_number`, `moo`, `village`, `soi`, `road`, `PROVINCE_ID`, `AMPHUR_ID`, `DISTRICT_ID`, `post_code`, `phone`) VALUES
-(8, 32, 'ณัฐดนัย', 'ทองคำปั้น', 'อาคาร', '1', '99', 'Huay Khwang', 7, 'ทดทด', 'สอบ', 'บางถนน', 1, 18, 120, 10310, '02123456'),
-(10, 34, 'ณัฐดนัย', 'ทองคำปั้น', '', '', '', '44/44', 7, '', '', '', 3, 59, 313, 11111, '02123456');
-
---
 -- Indexes for dumped tables
 --
 
@@ -10211,6 +10215,18 @@ ALTER TABLE `address_geography`
 --
 ALTER TABLE `address_province`
   ADD PRIMARY KEY (`PROVINCE_ID`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `person`
@@ -10272,10 +10288,20 @@ ALTER TABLE `address_geography`
 ALTER TABLE `address_province`
   MODIFY `PROVINCE_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `product_categories`
 --
@@ -10295,7 +10321,7 @@ ALTER TABLE `product_sub_categories`
 -- AUTO_INCREMENT for table `users_data`
 --
 ALTER TABLE `users_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

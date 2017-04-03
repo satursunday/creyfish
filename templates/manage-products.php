@@ -4,7 +4,6 @@ $cat_id = $_GET["cat_id"];
 $sub_cat_id = $_GET["sub_cat_id"];
 $products = mysql_fetch_data("SELECT * FROM product_detail");
 if(isset($_POST["product-name"])){
-	$date = date("d-M-Y H:i:s");
 	$img = array();
 	foreach($_FILES as $foo){
 		if($foo["size"] > 0){

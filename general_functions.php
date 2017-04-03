@@ -110,6 +110,31 @@ function do_login($user, $pass, $cookie = false)
 	}
 }
 
+function send_mail_client($subject, $msg)
+{
+	send_mail($subject, $msg, $_SESSION["user_login"]["email"], $_SESSION["user_login"]["firstname"] . ' ' . $_SESSION["user_login"]["lastname"]);
+}
+
+function send_mail_admin($subject, $msg)
+{
+	$admin = mysql_fetch_data("
+		SELECT
+			p.email
+			, u.firstname
+			, u.lastname
+		FROM
+			person AS p
+			, staff_list AS s
+			, users_data AS u
+		WHERE
+			p.id = s.uid
+			AND p.id = u.uid
+	");
+	foreach($admin as $a){
+		send_mail($subject, $msg, $a["email"], $a["firstname"] . ' ' . $a["lastname"]);
+	}
+}
+
 function send_mail($subject, $msg, $to, $name)
 {
 	require_once("libs/phpmailer/PHPMailerAutoload.php");
@@ -135,7 +160,7 @@ function send_mail($subject, $msg, $to, $name)
 
 function do_redirect($location)
 {
-	if($location = "index"){
+	if($location == "index"){
 		$location = preg_replace("/(.*)index.php/", "$1" , $_SERVER["SCRIPT_NAME"]);
 	}
 	echo <<<EOF
@@ -143,6 +168,11 @@ function do_redirect($location)
 	window.location = '{$location}';
 </script>
 EOF;
+}
+	
+function numberDecimal($number)
+{
+	return number_format($number, 2, ".", ",");
 }
 	
 function platformSlashes($path) {
@@ -217,6 +247,35 @@ function platformSlashes($path) {
 			$("#cart-badge").text(data.badge);
 			scrollToBadge();
 			badgeBlink();
+			window.location = window.location.href;
+		});
+	}
+
+	function changeConfirm(id)
+	{
+		$.post("payment-confirm", {id: id }).done(function(data){
+			data = parseData(data);
+			$("#total").text(data.total);
+		});
+	}
+
+	function confirmPayment(oid)
+	{
+		$.post("staff", {action: 'confirm', id: oid }).done(function(data){
+			window.location = window.location.href;
+		});
+	}
+
+	function rejectPayment(oid)
+	{
+		$.post("staff", {action: 'reject', id: oid }).done(function(data){
+			window.location = window.location.href;
+		});
+	}
+
+	function cancelOrder(oid)
+	{
+		$.post("orderlist", {action: 'cancel', id: oid }).done(function(data){
 			window.location = window.location.href;
 		});
 	}

@@ -1,5 +1,8 @@
 RewriteEngine On
 
+RewriteCond %{HTTP_HOST} ^payment-confirm/[0-9]*/?$ [NC,OR]
+RewriteRule ^(payment-confirm)/([0-9]*)/?$ index.php?action=$1&id=$2 [NC,L]
+
 RewriteCond %{HTTP_HOST} ^management/[0-9]*$ [NC,OR]
 RewriteRule ^(management)/?([0-9]*)/?$ index.php?action=$1&id=$2 [NC,L]
 
